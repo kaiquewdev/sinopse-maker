@@ -1,9 +1,28 @@
+# -*- coding: utf-8 -*-
+from flask import url_for
+
 def configuration():
     return {
         'title': 'Sinopse Maker',
         'name': 'Sinopse Maker',
         'description': 'Create sinopse, and save format json.',
-        'author': 'Kaique da Silva <kaique.developer@gmail.com>'
+        'author': 'Kaique da Silva <kaique.developer@gmail.com>',
+        'menu': [
+            [
+                'Inicio',
+                url_for( 'index' )
+            ],
+
+            [
+                'Sinopses',
+                url_for( 'sinopses' )
+            ],
+
+            [
+                'Sobre',
+                url_for( 'about' )
+            ]
+        ]
     }     
 
 def read_file( filepath='' ):

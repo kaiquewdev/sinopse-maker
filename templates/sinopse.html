@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <section>
+        <header>
+            <h1>Sinopses</h1>
+        </header>
+
+        <hr />
+
+        <article>
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs" id="sinopse-dashboard">
+                   <li>
+                       <a href="#" data-toggle="tab">Nova sinopse</a>
+                   </li>
+                   <li>
+                       <a href="#" data-toggle="tab">Minhas sinopses</a>
+                   </li>
+                </ul>
+
+                <div class="tab-content">
+                    <form action="/sinopse/new" method="post">
+                        <label>
+                            Nome: 
+                            <input type="text" name="file_name" value="" />
+
+                            <input type="submit" class="btn" value="Criar" />
+                        </label>
+                    </form>
+                </div>
+
+                <div class="tab-content">
+                    <h3>Lista - ( {{ sinopse.list|length }} )</h3>
+
+                    <hr />
+
+                    <ul>
+                        {% if sinopse.list %}
+                            {% for filename in sinopse.list %}
+                                <li>
+                                    <a href="/sinopses/view/{{ filename }}">{{filename}}<a> - <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm"> remove </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+        </article>
+    </section>
+
+{% endblock %}
