@@ -42,6 +42,8 @@
                                     <a href="/sinopses/view/{{ filename }}">{{filename}}<a> - <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm"> remove </a>
                                 </li>
                             {% endfor %}
+                        {% elif not sinopse.list %}
+                            <li>Você não tem nenhum item.</li>
                         {% endif %}
                     </ul>
                 </div>

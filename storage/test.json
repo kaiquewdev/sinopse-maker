@@ -1,0 +1,14 @@
+{
+    "content": {
+        "attrs": {
+            "href": "/"
+        }, 
+        "content": {
+            "text": "fastFrag HTML => JSON"
+        }, 
+        "css": "my_class", 
+        "type": "a"
+    }, 
+    "css": "my_class", 
+    "id": "my_id"
+}

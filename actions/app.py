@@ -15,7 +15,7 @@ def configuration():
 
             [
                 'Sinopses',
-                url_for( 'sinopses' )
+                url_for( 'sinopse_dashboard' )
             ],
 
             [
