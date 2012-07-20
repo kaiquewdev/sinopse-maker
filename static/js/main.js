@@ -33,10 +33,11 @@ require([
                         dataType: 'json',
                         success: function ( data ) {
                             var renderData = SinopseMaker.html.render( data );
-                            console.log( renderData );
-                            //self.insertHtml( 
-                            //    renderData.innerHTML    
-                            //);
+                            var holderData = document.createElement('div');
+                                holderData.appendChild( renderData );
+
+                            console.log( fastFrag );
+                            self.insertHtml( holderData.innerHTML );
                         }
                     });
                 });
