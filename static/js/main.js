@@ -21,7 +21,9 @@ require([
                     url: '/sinopses/json/' + slugs('last'),
                     dataType: 'json',
                     success: function ( data ) {
-                            sinopseView.html( SinopseMaker.html.render( data ) );    
+                            var holderData = SinopseMaker.html.render( data );
+                            
+                            sinopseView.html( holderData );    
                     }
                 });
             } else if ( baseURL.indexOf('edit') > -1 ) {
@@ -36,10 +38,11 @@ require([
                             var holderData = document.createElement('div');
                                 holderData.appendChild( renderData );
 
-                            console.log( fastFrag );
                             self.insertHtml( holderData.innerHTML );
                         }
                     });
+                }, {
+                    height: 600
                 });
             }
         } if ( slugs('last') === 'sinopses' ) {

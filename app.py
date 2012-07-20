@@ -6,10 +6,8 @@ import json
 app = Flask( __name__ )
 
 @app.route('/')
-def index():
-    conf = actions.app.configuration()
-    
-    return render_template( 'index.html', app=conf )
+def index():    
+    return redirect( url_for( 'sinopse_dashboard' ) )
 
 @app.route('/sinopses')
 def sinopse_dashboard():
@@ -31,6 +29,7 @@ def sinopse_by_file( filepath ):
     if filepath[0] == 'view':
         if filepath[1]:
             sinopse = {
+                'filename': filepath[1],
                 'content': json.dumps( actions.app.read_file( './storage/%s' % ( filepath[ 1 ] ) ) )
             }
 
@@ -40,7 +39,12 @@ def sinopse_by_file( filepath ):
 
     elif filepath[0] == 'edit':
         if filepath[1]:
-            return render_template( 'sinopse-edit.html', app=conf )
+
+            sinopse = {
+                'filename': filepath[1],
+            }
+
+            return render_template( 'sinopse-edit.html', app=conf, sinopse=sinopse )
         return redirect( url_for( 'sinopses' ) )
 
     elif filepath[0] == 'json':

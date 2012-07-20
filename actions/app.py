@@ -9,18 +9,8 @@ def configuration():
         'author': 'Kaique da Silva <kaique.developer@gmail.com>',
         'menu': [
             [
-                'Inicio',
-                url_for( 'index' )
-            ],
-
-            [
                 'Sinopses',
                 url_for( 'sinopse_dashboard' )
-            ],
-
-            [
-                'Sobre',
-                url_for( 'about' )
             ]
         ]
     }     
