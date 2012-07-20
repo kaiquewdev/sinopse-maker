@@ -1,64 +1,47 @@
 require([
     "jquery",
-    "ckeditor/ckeditor", 
-    "ckeditor/adapters/jquery", 
-    "libs/bootstrap/tab", 
+    "ckeditor/adapters/jquery",
     "libs/fastFrag",
     "libs/sinopseMaker"
-], function($) {
-    var sinopseEditor = $('textarea.sinopse-content-editor');
+], function( $, window ) {
+    $(document).ready(function () {
+        var sinopseEditor = $('textarea.sinopse-content-editor');
 
-    var sinopseView = $('.sinopse-content-view');
+        var sinopseView = $('.sinopse-content-view');
 
-    var baseURL = SinopseMaker.slug.href();
-    var slugs = SinopseMaker.slug.href;
+        var baseURL = SinopseMaker.slug.href();
+        var slugs = SinopseMaker.slug.href;
 
-    $(function () {
-
-        if ( baseURL.indexOf('sinopses') > -1 ) {
-            if ( baseURL.indexOf('view') > -1 ) {
-                $.ajax({
-                    url: '/sinopses/json/' + slugs('last'),
-                    dataType: 'json',
-                    success: function ( data ) {
-                            var holderData = SinopseMaker.html.render( data );
-                            
-                            sinopseView.html( holderData );    
-                    }
-                });
-            } else if ( baseURL.indexOf('edit') > -1 ) {
-                var sinopseCKEditor = sinopseEditor.ckeditor(function () {
-                    var self = this;
-
-                    $.ajax({
-                        url: '/sinopses/json/' + slugs('last'),
-                        dataType: 'json',
-                        success: function ( data ) {
-                            var renderData = SinopseMaker.html.render( data );
-                            var holderData = document.createElement('div');
-                                holderData.appendChild( renderData );
-
-                            self.insertHtml( holderData.innerHTML );
-                        }
-                    });
-                }, {
-                    height: 600
-                });
+        $.ajax({
+            url: '/sinopses/json/' + slugs('last'),
+            dataType: 'json',
+            success: function ( data ) {
+                    var holderData = SinopseMaker.content.toHtml( data );
+                    
+                    sinopseView.html( holderData );    
             }
-        } if ( slugs('last') === 'sinopses' ) {
-            // For tabs
+        });
 
-            $('.tab-content').hide().eq(1).show();
+        var sinopseContainer = sinopseEditor.ckeditor(function () {
+            var self = this;
 
-            $('#sinopse-dashboard a').click(function ( e ) {
-                var tabid = $('#sinopse-dashboard a').index( this );
+            var EditorContent = $.ajax({
+                url: '/sinopses/json/' + slugs('last'),
+                dataType: 'json',
+                success: function ( data ) {
+                    var renderData = SinopseMaker.content.toHtml( data );
+                    var holderData = document.createElement('div');
+                        holderData.appendChild( renderData );
 
-                e.preventDefault();
-                $( this ).tab('show');
-
-                $('.tab-content').hide();
-                $('.tab-content').eq( tabid ).show();
+                    self.insertHtml( holderData.innerHTML );
+                }
             });
-        }
+
+            EditorContent.done(function () {
+                console.log( SinopseMaker.content.toJson( self.getData() ) );
+            });
+        }, {
+            height: 600
+        });
     });
 });

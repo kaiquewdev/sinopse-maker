@@ -9,58 +9,55 @@
         <hr />
 
         <article>
-            <div class="tabbable tabs-left">
-                <ul class="nav nav-tabs" id="sinopse-dashboard">
-                   <li>
-                       <a href="#" data-toggle="tab">Nova sinopse</a>
-                   </li>
-                   <li>
-                       <a href="#" data-toggle="tab">Minhas sinopses</a>
-                   </li>
-                </ul>
+            <fieldset class="sinopse-document-make">
+                <form action="/sinopse/new" method="post">
+                    <label>
+                        <span>
+                            Nome do aquivo: 
+                        </span>
 
-                <div class="tab-content">
-                    <form action="/sinopse/new" method="post">
-                        <label>
-                            Nome: 
-                            <input type="text" name="file_name" value="" />
+                        <input type="text" name="file_name" value="" />
 
-                            <input type="submit" class="btn" value="Criar" />
-                        </label>
-                    </form>
-                </div>
+                        <input type="submit" class="btn" value="Criar" />
+                    </label>
+                </form>
+            </fieldset>
+        </article>
 
-                <div class="tab-content">
-                    <h3>Lista - ( {{ sinopse.list|length }} )</h3>
+        <hr>
 
-                    <hr />
+        <article>
+            <h3>Lista - ( {{ sinopse.list|length }} )</h3>
 
-                    {% if sinopse.list %}
-                        <ul>
-                            {% for filename in sinopse.list %}
-                                <li>
-                                    <a href="/sinopses/view/{{ filename }}">
-                                        {{filename}}
-                                    <a>
-                                    -
-                                    <a href="/sinopses/edit/{{ filename }}">
-                                        Editar
-                                    <a>
-                                    
-                                    <span>|</span>
+            <br>
 
-                                    <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm">
-                                        Remover
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% elif not sinopse.list %}
-                        <p>Você não tem nenhum item.</p>
-                    {% endif %}
-                </div>
-
-            </div>
+            {% if sinopse %}
+                <table class="table">
+                    {% for filename in sinopse.list %}
+                        <tr>
+                            <td>
+                                <a href="/sinopses/view/{{ filename }}">
+                                    {{ filename }}
+                                <a>
+                            </td>
+                            
+                            <td>
+                                <a href="/sinopses/edit/{{ filename }}">
+                                    Editar
+                                <a>
+                            </td>
+                            
+                            <td>
+                                <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm">
+                                    Remover
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>Você não tem nenhum item.</p>
+            {% endif %}
         </article>
     </section>
 

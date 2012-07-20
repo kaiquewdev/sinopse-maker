@@ -1,12 +1,18 @@
 var SinopseMaker = (function ( document, $, jsonTool ) {    
     var core = function () {};
 
-    core.prototype.html = {
-        mount: function ( content ) {
-            
+    core.prototype.content = {
+        toJson: function ( content ) {
+            var output = JSON.stringify( {} );
+
+            if ( content ) {
+                output = JSON.stringify( content );
+            }
+
+            return output;
         },
 
-        render: function ( content ) {
+        toHtml: function ( content ) {
             return jsonTool.create( content );
         }    
     };

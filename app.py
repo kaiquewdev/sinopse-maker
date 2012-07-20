@@ -14,7 +14,7 @@ def sinopse_dashboard():
     conf = actions.app.configuration()
 
     sinopse = {
-        'list': actions.app.list_files( './storage' )    
+        'list': actions.app.list_files( './storage' )   
     }
 
     return render_template( 'sinopse.html', app=conf, sinopse=sinopse )

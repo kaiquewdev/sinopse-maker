@@ -1,0 +1,12 @@
+{
+    "content": {
+        "attrs": {
+            "href": "http://www.google.com", 
+            "target": "_new"
+        }, 
+        "content": {
+            "text": "Google"
+        }, 
+        "type": "a"
+    }
+}
