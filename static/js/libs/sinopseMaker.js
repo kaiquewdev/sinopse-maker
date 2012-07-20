@@ -6,7 +6,8 @@ var SinopseMaker = (function ( document, $, jsonTool ) {
             var output = JSON.stringify( {} );
 
             if ( content ) {
-                output = JSON.stringify( content );
+                var contentString = content.replace( '\n', '' );
+                output = contentString;
             }
 
             return output;
