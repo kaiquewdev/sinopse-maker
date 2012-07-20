@@ -2,6 +2,10 @@ var SinopseMaker = (function ( document, $, jsonTool ) {
     var core = function () {};
 
     core.prototype.html = {
+        mount: function ( content ) {
+            
+        },
+
         render: function ( content ) {
             return jsonTool.create( content );
         }    

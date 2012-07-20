@@ -35,17 +35,29 @@
 
                     <hr />
 
-                    <ul>
-                        {% if sinopse.list %}
+                    {% if sinopse.list %}
+                        <ul>
                             {% for filename in sinopse.list %}
                                 <li>
-                                    <a href="/sinopses/view/{{ filename }}">{{filename}}<a> - <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm"> remove </a>
+                                    <a href="/sinopses/view/{{ filename }}">
+                                        {{filename}}
+                                    <a>
+                                    -
+                                    <a href="/sinopses/edit/{{ filename }}">
+                                        Editar
+                                    <a>
+                                    
+                                    <span>|</span>
+
+                                    <a href="/sinopses/remove/{{ filename }}" class="dialog-confirm">
+                                        Remover
+                                    </a>
                                 </li>
                             {% endfor %}
-                        {% elif not sinopse.list %}
-                            <li>Você não tem nenhum item.</li>
-                        {% endif %}
-                    </ul>
+                        </ul>
+                    {% elif not sinopse.list %}
+                        <p>Você não tem nenhum item.</p>
+                    {% endif %}
                 </div>
 
             </div>

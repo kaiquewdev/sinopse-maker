@@ -37,13 +37,22 @@ def sinopse_by_file( filepath ):
             return render_template( 'sinopse-view.html', app=conf, sinopse=sinopse )
 
         return redirect( url_for( 'sinopses' ) )
+
+    elif filepath[0] == 'edit':
+        if filepath[1]:
+            return render_template( 'sinopse-edit.html', app=conf )
+        return redirect( url_for( 'sinopses' ) )
+
     elif filepath[0] == 'json':
-        request.data = json.dumps( actions.app.read_file( './storage/%s' % ( filepath[ 1 ] ) ) )
+        if filepath[1]:
+            request.data = json.dumps( actions.app.read_file( './storage/%s' % ( filepath[ 1 ] ) ) )
         
         return request.data
-    elif filepath[0] == 'remove':
-        actions.app.delete_file( './storage/%s' % ( filepath[ 1 ] ) )
         
+    elif filepath[0] == 'remove':
+        if filepath[1]:
+            actions.app.delete_file( './storage/%s' % ( filepath[ 1 ] ) )
+
         return redirect( url_for( 'sinopse_dashboard' ) )
 
 @app.route('/sinopse/new', methods=['POST'])
